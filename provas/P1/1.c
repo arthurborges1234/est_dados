@@ -59,8 +59,6 @@ int main(){
     printf("\n\n");
     return 0;
 }
-
-
 lista *aloca_lista(){
     lista *novo;
     novo = (lista *)malloc(sizeof(lista));
@@ -68,7 +66,6 @@ lista *aloca_lista(){
     novo->inicio = NULL;
     return novo;
 }
-
 car *aloca_car(char letra)
 {
     car *novo;
@@ -123,5 +120,3 @@ void separa_vogais_consoantes(lista *l_a,lista *l_b ,lista *l_c){
         }
     }
 }
-
-
