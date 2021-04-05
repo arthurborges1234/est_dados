@@ -48,6 +48,7 @@ void remove_elemento(lista *l,int x);
 void mostrar_lista(lista *l);
 void mostrar_lista_contrario(lista *l);
 void remove_primos(lista *l);
+
 void erro(){
     printf("opcao indisoponivel\n");
     printf("favor escolher uma das opcoes indicadas\n\n");

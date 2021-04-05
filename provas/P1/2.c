@@ -30,18 +30,18 @@ void mostrar_lista(lista *l);
 
 
 int main(){
-    printf("quantos nuemros voce deseja adicionar a lista: ");
-    int qtd;
-    scanf("%d", &qtd);
-    int *numeros;
-    numeros = (int*)malloc(sizeof(int)*qtd);
-    printf("informe %d numeros", qtd);
+    printf("quantos numeros voce deseja adicionar na lista 1?\n");
+    int n;
+    scanf("%d",&n);
+    int *num = (int*)malloc(sizeof(int)*n);
     
     lista *l = aloca_lista();
-    for(int i = 0 ; i<qtd ; i++){
-        scanf("%d", &numeros[i]);
-        incluir_elemento(l,numeros[i]);
-
+    
+    printf("insira os numeros da lista 1: ");
+    for(int i = 0 ;i <n; i++){
+        scanf("%d", &num[i]);
+        incluir_elemento(l,num[i]);
+        
     }
     
     printf("lista antes de remover os numeros perfeitos:");
@@ -79,23 +79,32 @@ void mostrar_lista(lista *l){
         elemento *aux = l->inicio;
 
         while(aux != NULL){
-            printf("%c ", aux->valor);
+            printf("%d->", aux->valor);
             aux = aux->proximo;
         }
     }
-
+    printf("\n");
 }
 
 void incluir_elemento(lista*l, int x){
     
-    elemento *novo = aloca_elemento();
+    elemento *novo, *aux;
+    novo = aloca_elemento();
     novo->valor = x;
-    elemento *aux = l->inicio;
-    while (aux->proximo!=NULL){
-        aux = aux->proximo;
+
+    if (l->inicio == NULL)
+    {
+        l->inicio = novo;
     }
-    aux->proximo = novo;
-    
+    else
+    {
+        aux = l->inicio;
+        while (aux->proximo != NULL)
+        {
+            aux = aux->proximo;
+        }
+        aux->proximo = novo;
+    }
     l->qtd++;
 
 }
@@ -104,7 +113,7 @@ int encontra_perfeito(int numero){
 
     int  soma = 0;
 
-    for(int divisor= 1 ; (divisor<numero/2); divisor++){
+    for(int divisor= 1 ; (divisor<=numero/2); divisor++){
         if(numero%divisor==0){
             soma+=divisor;
         }
@@ -116,40 +125,37 @@ int encontra_perfeito(int numero){
     }
 }
 
-
 void remove_perfeitos(lista *l){
     if(l->inicio==NULL){
         printf("lista vazia");
     }else{
-        elemento *aux , *ant;
-        
+        elemento *atual;
+        atual = l->inicio;
+        elemento *ant;
         ant = l->inicio;
-        aux = ant->proximo;
-        while(aux!=NULL){
-            if(l->qtd>1){
-                if(encontra_perfeito(l->inicio->valor)==1){
-                    l->inicio = aux->proximo;
-                    
-                    l->qtd--;
-                    
-                }else if(encontra_perfeito(aux->valor)==1){
-                    
-                    ant->proximo = aux->proximo;
-                    ant = ant->proximo;
-                    aux = aux->proximo;    
-                    l->qtd--;
+        for(int i = 0; i <l->qtd; i++){
+            while(atual!=NULL){
+                if(encontra_perfeito(atual->valor)==1){
+                    if(atual == l->inicio){
+                        l->inicio = l->inicio->proximo;
+                        atual = l->inicio;
+                        ant = l->inicio;
+                    }else{
+                        
+                        ant->proximo = atual->proximo;
+                        l->qtd--;
+                    }
 
-                }else{
-                    ant = aux;
-                    aux = aux->proximo;
-                    
                 }
-
-            }else{
-                l->inicio =NULL;
-                l->qtd = 0;
+                ant = atual;
+                atual=atual->proximo;
             }
         }
 
+
+
+
+
+        
     }
 }
