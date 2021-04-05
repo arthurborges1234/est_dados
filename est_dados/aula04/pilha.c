@@ -25,7 +25,7 @@ int main(){
         printf("\n 3 - stackpop");
         printf("\n 4 - sair");
 
-        int teste = 0;
+
         switch (opcao)
         {
         case 1:
