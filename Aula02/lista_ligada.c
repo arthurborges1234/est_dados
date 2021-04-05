@@ -101,8 +101,7 @@ int main(){
 }
 
 
-lista *aloca_lista()
-{
+lista *aloca_lista(){
     lista *novo;
     novo = (lista *)malloc(sizeof(lista));
     novo->qtd = 0;
